@@ -47,27 +47,35 @@ while True:
 
         if chr(c) == '\n':
             #print(float(joined_seq))
-            num = float(joined_seq)
-            print(num)
-            if dm.DisplayOrientation == win32con.DMDO_DEFAULT: #기본상태일때
-                if num > 50: #시계방향 50도 이상 회전시
-                    rotation = win32con.DMDO_90
-                    rotation_flag = 1
-                elif num < -50: #반시계방향 50도 이상 회전시
-                    rotation = win32con.DMDO_270
-                    rotation_flag = 1
+            try:
+                num = float(joined_seq)
+                print(num)
+                if dm.DisplayOrientation == win32con.DMDO_DEFAULT: #기본상태일때
+                    if num > 50: #시계방향 50도 이상 회전시
+                        rotation = win32con.DMDO_90
+                        rotation_flag = 1
+                    elif num < -50: #반시계방향 50도 이상 회전시
+                        rotation = win32con.DMDO_270
+                        rotation_flag = 1
 
-            elif dm.DisplayOrientation == win32con.DMDO_90 : #90도 회전상태일때
-                if num < 40 : #원래 상태로 간주
-                    rotation = win32con.DMDO_DEFAULT
-                    rotation_flag = 1
+                elif dm.DisplayOrientation == win32con.DMDO_90 : #90도 회전상태일때
+                    if num < 40 : #원래 상태로 간주
+                        rotation = win32con.DMDO_DEFAULT
+                        rotation_flag = 1
 
-            elif dm.DisplayOrientation == win32con.DMDO_270: #279도회전상태일때
-                if num > -40 : #원래상태로 간주
-                    rotation = win32con.DMDO_DEFAULT
-                    rotation_flag = 1
-            seq = []
-            break
+                elif dm.DisplayOrientation == win32con.DMDO_270: #279도회전상태일때
+                    if num > -40 : #원래상태로 간주
+                        rotation = win32con.DMDO_DEFAULT
+                        rotation_flag = 1
+
+            except Exception as e:
+                print(e)
+
+            finally:
+                seq = []
+                break
+
+
     if rotation_flag == 1 :
         #가로세로 변경
         if((dm.DisplayOrientation + rotation)%2 == 1):
