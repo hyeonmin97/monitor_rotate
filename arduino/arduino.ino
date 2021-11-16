@@ -783,7 +783,7 @@ void setup()
   uint8_t c;
 
 
-  Serial.begin(9600);
+  Serial.begin(115200);
   /*
   Serial.println(F("InvenSense MPU-6050"));
   Serial.println(F("June 2012"));
@@ -953,10 +953,10 @@ void loop()
   Serial.print(unfiltered_gyro_angle_z, 2);*/
 
   
-  Serial.println(angle_x, 2);
+  Serial.println(angle_y);
   
   // Delay so we don't swamp the serial port
-  delay(5);
+  delay(10);
 }
 
 
